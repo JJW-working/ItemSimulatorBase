@@ -16,6 +16,9 @@ datasource db {
 model item {
   // itemCode: 정수형, 기본 키
   itemCode  Int @id
+  itemName  String
+  atk       Int
+  price     Int
 }
 
 model character {
