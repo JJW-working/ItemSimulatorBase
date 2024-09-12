@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
 }
 
 datasource db {
@@ -13,20 +14,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model item {
-  // itemCode: 정수형, 기본 키
-  itemCode  Int @id
-  itemName  String
-  atk       Int
-  price     Int
+model Item {
+  itemCode      Int            @id
+  itemName      String
+  atk           Int
+  price         Int
 }
 
-model character {
-  characterId Int @id
+model Character {
+  characterId   String         @id
+  power         Int            @default(100)
+  money         Int            @default(10000)
+  account       Account        @relation(fields: [accountId], references: [accountId])
+  accountId     String
 }
 
-model account {
-  accountId Int @id
+model Account {
+  accountId       String       @id
+  accountPassword String
+  name            String
+  characters      Character[] 
 }
 
 
